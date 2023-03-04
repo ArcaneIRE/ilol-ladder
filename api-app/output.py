@@ -18,9 +18,19 @@ def add_players(players):
     ladder = soup.find("ol", class_='ladder')
     ladder.clear()
     for player in players:
-        player_tag = soup.new_tag('li')
-        player_tag.string = player.name + ": " + str(player.rank)
-        ladder.append(player_tag)
+        tag = soup.new_tag('li')
+
+        name = soup.new_tag('span')
+        name.string = player.name
+        name['class'] = "name"
+        tag.append(name)
+
+        rank = soup.new_tag('span')
+        rank.string = str(player.rank)
+        rank['class'] = "rank " + player.rank.tier.name.lower()
+        tag.append(rank)
+
+        ladder.append(tag)
 
 
 def add_timestamp():

@@ -7,16 +7,86 @@
    Arcane's ilol Ladder
   </title>
   <style>
+    * {
+        box-sizing: border-box;
+    }
    body {
-            margin:0 auto;
-            width: 30rem;
-            font-family: sans-serif;
-            background-color: #EEE;
-            color: rgb(51, 51, 51);
-            font-size: 1.3rem;
-        }
+        margin: 0 auto;
+        width: 100%;
+        max-width: 30rem;
+        font-family: sans-serif;
+        background-color: #EEE;
+        color: rgb(51, 51, 51);
+        font-size: 1.3rem;
+    }
 
     h1 {
+        text-align: center;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ladder {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: .2rem;
+        padding: 0 .5rem;
+        width: 100%;
+        max-width: 25rem;
+    }
+
+    .ladder li {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        counter-increment: rank;
+    }
+
+    .ladder li .name::before {
+        content: counter(rank) ".";
+    }
+
+    .challenger {
+        color: #68b1cd;
+    }
+    .grandmaster {
+        color: #cb0b0c;
+    }
+
+    .master {
+        color: #ac1fc9;
+    }
+
+    .diamond {
+        color: #6795d6;
+    }
+
+    .platinum {
+        color: #376261;
+    }
+
+    .gold {
+        color: #8a7b43;
+    }
+
+    .silver {
+        color: #4c565a;
+    }
+
+    .bronze {
+        color: #482820;
+    }
+
+    .iron {
+        color: #7d7674;
+    }
+
+    .timestamp {
         text-align: center;
     }
   </style>
@@ -30,50 +100,120 @@
   <main>
    <ol class="ladder">
     <li>
-     Arcane: MASTER I 210LP
+     <span class="name">
+      Arcane
+     </span>
+     <span class="rank master">
+      MASTER I 210LP
+     </span>
     </li>
     <li>
-     Anomaly: DIAMOND I 42LP
+     <span class="name">
+      Anomaly
+     </span>
+     <span class="rank diamond">
+      DIAMOND I 42LP
+     </span>
     </li>
     <li>
-     Gulag: DIAMOND I 37LP
+     <span class="name">
+      Gulag
+     </span>
+     <span class="rank diamond">
+      DIAMOND I 37LP
+     </span>
     </li>
     <li>
-     MadaMars: DIAMOND III 30LP
+     <span class="name">
+      MadaMars
+     </span>
+     <span class="rank diamond">
+      DIAMOND III 30LP
+     </span>
     </li>
     <li>
-     Tedblonde: PLATINUM I 80LP
+     <span class="name">
+      Tedblonde
+     </span>
+     <span class="rank platinum">
+      PLATINUM I 80LP
+     </span>
     </li>
     <li>
-     Wieler: PLATINUM I 73LP
+     <span class="name">
+      Wieler
+     </span>
+     <span class="rank platinum">
+      PLATINUM I 73LP
+     </span>
     </li>
     <li>
-     Lusch: PLATINUM I 33LP
+     <span class="name">
+      Hai
+     </span>
+     <span class="rank platinum">
+      PLATINUM I 20LP
+     </span>
     </li>
     <li>
-     Hai: PLATINUM I 20LP
+     <span class="name">
+      Lusch
+     </span>
+     <span class="rank platinum">
+      PLATINUM I 11LP
+     </span>
     </li>
     <li>
-     bgscurtis: PLATINUM II 75LP
+     <span class="name">
+      bgscurtis
+     </span>
+     <span class="rank platinum">
+      PLATINUM II 75LP
+     </span>
     </li>
     <li>
-     Crustypants: PLATINUM II 0LP
+     <span class="name">
+      Crustypants
+     </span>
+     <span class="rank platinum">
+      PLATINUM II 0LP
+     </span>
     </li>
     <li>
-     Arkali: PLATINUM IV 1LP
+     <span class="name">
+      Arkali
+     </span>
+     <span class="rank platinum">
+      PLATINUM IV 1LP
+     </span>
     </li>
     <li>
-     Hawkens: GOLD I 70LP
+     <span class="name">
+      Hawkens
+     </span>
+     <span class="rank gold">
+      GOLD I 70LP
+     </span>
     </li>
     <li>
-     Jackattack317: GOLD I 0LP
+     <span class="name">
+      Jackattack317
+     </span>
+     <span class="rank gold">
+      GOLD I 0LP
+     </span>
     </li>
     <li>
-     CrimsonCyclist: SILVER I 0LP
+     <span class="name">
+      CrimsonCyclist
+     </span>
+     <span class="rank silver">
+      SILVER II 75LP
+     </span>
     </li>
    </ol>
    <div class="timestamp">
-    Last Refreshed: 17:58 04/03/2023(Irish time)
+    Last Refreshed: 18:24 04/03/2023(Irish time)
    </div>
   </main>
  </body>
