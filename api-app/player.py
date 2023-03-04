@@ -27,6 +27,8 @@ class Player:
         for queue_stats in all_queue_stats:
             if queue_stats['queueType'] == "RANKED_SOLO_5x5":
                 soloq_stats = queue_stats
+        if soloq_stats == None:
+            return
         tier = soloq_stats['tier']
         division = soloq_stats['rank']
         lp = soloq_stats['leaguePoints']
