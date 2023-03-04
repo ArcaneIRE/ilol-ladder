@@ -45,6 +45,8 @@ def get_opgg(player):
 def add_timestamp():
     timestamp = soup.find("div", class_='timestamp')
     timestamp.clear()
-    current_time = datetime.now().strftime("%H:%M %d/%m/%Y")
-    time_string = "Last Refreshed: " + current_time + "(Irish time)"
+    current_time = datetime.now().strftime("%H:%M")
+    current_date = datetime.now().strftime("%d/%m/%Y")
+    time_string = "Last Refreshed: " + \
+        current_time + " (Irish time) " + current_date
     timestamp.append(time_string)
