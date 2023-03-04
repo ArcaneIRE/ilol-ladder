@@ -10,7 +10,7 @@ with open('docs\index.html', 'r+') as f:
 def buildPage(players):
     add_players(players)
     add_timestamp()
-    with open('docs\index.html', 'w') as f:
+    with open('docs\index.html', 'w', encoding="utf-8") as f:
         f.write(str(soup.prettify()))
 
 
@@ -20,9 +20,10 @@ def add_players(players):
     for player in players:
         tag = soup.new_tag('li')
 
-        name = soup.new_tag('span')
+        name = soup.new_tag('a')
         name.string = player.name
         name['class'] = "name"
+        name['href'] = get_opgg(player)
         tag.append(name)
 
         rank = soup.new_tag('span')
@@ -31,6 +32,14 @@ def add_players(players):
         tag.append(rank)
 
         ladder.append(tag)
+
+
+def get_opgg(player):
+    if len(player.usernames) > 1:
+        return "https://www.op.gg/multisearch/euw?summoners=" + \
+            ','.join(player.usernames)
+    else:
+        return "https://www.op.gg/summoners/euw/" + player.usernames[0]
 
 
 def add_timestamp():
