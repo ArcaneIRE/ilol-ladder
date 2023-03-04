@@ -1,11 +1,20 @@
 from bs4 import BeautifulSoup
+from datetime import datetime
+
+
+with open('docs\index.html', 'r+') as f:
+    contents = f.read()
+    soup = BeautifulSoup(contents, 'html.parser')
 
 
 def buildPage(players):
-    with open('docs\index.html', 'r+') as f:
-        contents = f.read()
-        soup = BeautifulSoup(contents, 'html.parser')
+    add_players(players)
+    add_timestamp()
+    with open('docs\index.html', 'w') as f:
+        f.write(str(soup.prettify()))
 
+
+def add_players(players):
     ladder = soup.find("ol", class_='ladder')
     ladder.clear()
     for player in players:
@@ -13,5 +22,10 @@ def buildPage(players):
         player_tag.string = player.name + ": " + str(player.rank)
         ladder.append(player_tag)
 
-    with open('docs\index.html', 'w') as f:
-        f.write(str(soup.prettify()))
+
+def add_timestamp():
+    timestamp = soup.find("div", class_='timestamp')
+    timestamp.clear()
+    current_time = datetime.now().strftime("%H:%M %d/%m/%Y")
+    time_string = "Last Refreshed: " + current_time
+    timestamp.append(time_string)
