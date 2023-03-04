@@ -27,5 +27,5 @@ def add_timestamp():
     timestamp = soup.find("div", class_='timestamp')
     timestamp.clear()
     current_time = datetime.now().strftime("%H:%M %d/%m/%Y")
-    time_string = "Last Refreshed: " + current_time
+    time_string = "Last Refreshed: " + current_time + "(Irish time)"
     timestamp.append(time_string)
