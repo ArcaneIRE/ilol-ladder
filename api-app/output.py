@@ -47,6 +47,6 @@ def add_timestamp():
     timestamp.clear()
     current_time = datetime.now().strftime("%H:%M")
     current_date = datetime.now().strftime("%d/%m/%Y")
-    time_string = "Last Refreshed: " + \
+    time_string = "Last Refresh: " + \
         current_time + " (Irish time) " + current_date
     timestamp.append(time_string)
