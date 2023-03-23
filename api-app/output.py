@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 
-with open('docs\index.html', 'r+') as f:
+with open('docs/index.html', 'r+') as f:
     contents = f.read()
     soup = BeautifulSoup(contents, 'html.parser')
 
@@ -10,7 +10,7 @@ with open('docs\index.html', 'r+') as f:
 def buildPage(players):
     add_players(players)
     add_timestamp()
-    with open('docs\index.html', 'w', encoding="utf-8") as f:
+    with open('docs/index.html', 'w', encoding="utf-8") as f:
         f.write(str(soup.prettify()))
 
 

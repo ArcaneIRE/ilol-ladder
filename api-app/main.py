@@ -5,7 +5,7 @@ from functools import cmp_to_key
 
 if __name__ == "__main__":
     players = []
-    with open('api-app\players.csv', newline='', encoding="utf-8") as players_file:
+    with open('api-app/players.csv', newline='', encoding="utf-8") as players_file:
         reader = csv.reader(players_file)
         for row in reader:
             name = row[0]
