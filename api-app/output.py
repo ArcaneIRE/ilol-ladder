@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 
-with open('docs/index.html', 'r+') as f:
+with open('docs/index.html', 'r+', encoding="utf-8") as f:
     contents = f.read()
     soup = BeautifulSoup(contents, 'html.parser')
 
