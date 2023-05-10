@@ -23,23 +23,27 @@ def add_players(players):
         name = soup.new_tag('a')
         name.string = player.name
         name['class'] = "name"
-        name['href'] = get_opgg(player)
+        name['href'] = build_opgg(player)
         tag.append(name)
 
         rank = soup.new_tag('span')
-        rank.string = str(player.rank)
-        rank['class'] = "rank " + player.rank.tier.name.lower()
+        rank.string = str(player.highest_rank_summoner.rank)
+        tier = player.highest_rank_summoner.rank.tier.name.lower()
+        rank['class'] = "rank " + tier
         tag.append(rank)
 
         ladder.append(tag)
 
 
-def get_opgg(player):
-    if len(player.usernames) > 1:
-        return "https://www.op.gg/multisearch/euw?summoners=" + \
-            ','.join(player.usernames)
+def build_opgg(player):
+    if len(player.summoners) == 1:
+        return "https://www.op.gg/summoners/euw/" + player.summoners[0].username
     else:
-        return "https://www.op.gg/summoners/euw/" + player.usernames[0]
+        usernames = []
+        for summoner in player.summoners:
+            usernames.append(summoner.username)
+        return "https://www.op.gg/multisearch/euw?summoners=" + \
+            ','.join(usernames)
 
 
 def add_timestamp():

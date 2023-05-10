@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import os
 from riotwatcher import LolWatcher, ApiError
 from rank import Rank
+from summoner import Summoner
 
 load_dotenv()
 api_token = os.environ.get("API_KEY")
@@ -10,45 +11,32 @@ region = 'EUW1'
 
 
 class Player:
-    def __init__(self, name, role, usernames):
+    def __init__(self, name, role, puuids):
         self.name = name
         self.role = role
-        self.usernames = usernames
-        self.rank = self.__get_highest_rank()
+        self.summoners = []
+        for puuid in puuids:
+            self.summoners.append(Summoner(puuid))
+        self.highest_rank_summoner = self.__get_highest_rank_summoner()
 
-    def __get_rank(self, username):
-        summoner_info = lol_watcher.summoner.by_name(region, username)
-        summoner_id = summoner_info['id']
-        all_queue_stats = lol_watcher.league.by_summoner(region, summoner_id)
-        if not all_queue_stats:
-            return
+    def __get_highest_rank_summoner(self):
+        highest = None
+        for current in self.summoners:
+            if current.rank:
+                if highest == None:
+                    highest = current
+                elif current.rank > highest.rank:
+                    highest = current
+        return highest
 
-        soloq_stats = None
-        for queue_stats in all_queue_stats:
-            if queue_stats['queueType'] == "RANKED_SOLO_5x5":
-                soloq_stats = queue_stats
-        if soloq_stats == None:
-            return
-        tier = soloq_stats['tier']
-        division = soloq_stats['rank']
-        lp = soloq_stats['leaguePoints']
-        return Rank(tier, division, lp)
-
-    def __get_highest_rank(self):
-        highest_rank = self.__get_rank(self.usernames[0])
-        for username in self.usernames[1:]:
-            current_rank = self.__get_rank(username)
-            if current_rank:
-                if current_rank > highest_rank:
-                    highest_rank = current_rank
-        return highest_rank
-
-    def compare_rank(self, other_player):
-        if self.__class__ is not other_player.__class__:
+    def compare_rank_to(self, other_player):
+        if other_player.__class__ is not self.__class__:
             return NotImplemented
-        if self.rank > other_player.rank:
+        my_rank = self.highest_rank_summoner.rank
+        their_rank = other_player.highest_rank_summoner.rank
+        if my_rank > their_rank:
             return 1
-        elif self.rank < other_player.rank:
-            return -1
-        else:
+        elif my_rank == their_rank:
             return 0
+        else:
+            return -1

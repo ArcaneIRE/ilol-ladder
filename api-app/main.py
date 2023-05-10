@@ -10,14 +10,14 @@ if __name__ == "__main__":
         for row in reader:
             name = row[0]
             role = row[1]
-            usernames = list(row[2:])
-            player = Player(name, role, usernames)
+            puuids = list(row[2:])
+            player = Player(name, role, puuids)
 
-            if player.rank:
+            if player.highest_rank_summoner:
                 players.append(player)
 
     def cmp_func(x, y):
-        return x.compare_rank(y)
+        return x.compare_rank_to(y)
 
     sorted_players = sorted(players, key=cmp_to_key(cmp_func), reverse=True)
     buildPage(sorted_players)
