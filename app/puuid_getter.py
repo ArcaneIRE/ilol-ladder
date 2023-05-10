@@ -24,7 +24,7 @@ def get_puuids(usernames):
 
 if __name__ == "__main__":
     players = []
-    with open('api-app\players.csv', newline='', encoding="utf-8") as players_file:
+    with open('app\players.csv', newline='', encoding="utf-8") as players_file:
         reader = csv.reader(players_file)
         for row in reader:
             name = row[0]
@@ -35,7 +35,7 @@ if __name__ == "__main__":
             player.extend(puuids)
             players.append(player)
 
-    with open('api-app\players_puuids.csv', 'w', newline='', encoding="utf-8") as f:
+    with open('app\players_puuids.csv', 'w', newline='', encoding="utf-8") as f:
         writer = csv.writer(f)
         for player in players:
             writer.writerow(player)
