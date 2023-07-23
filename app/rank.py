@@ -7,10 +7,11 @@ class Tiers(Enum):
     SILVER = 3
     GOLD = 4
     PLATINUM = 5
-    DIAMOND = 6
-    MASTER = 7
-    GRANDMASTER = 8
-    CHALLENGER = 9
+    EMERALD = 6
+    DIAMOND = 7
+    MASTER = 8
+    GRANDMASTER = 9
+    CHALLENGER = 10
 
     def __lt__(self, other):
         if self.__class__ is other.__class__:
