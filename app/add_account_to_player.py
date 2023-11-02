@@ -32,8 +32,9 @@ if __name__ == "__main__":
         response = lol_watcher.summoner.by_name(region, username)
         puuids.append(response['puuid'])
 
-    temp_file = NamedTemporaryFile(mode='w', newline='', delete=False)
-    with open('app/players.csv', 'r', newline='', encoding="utf-8") as players_file, temp_file:
+    temp_file = NamedTemporaryFile(
+        mode='w', newline='', delete=False, encoding="utf-16")
+    with open('app/players.csv', 'r', newline='', encoding="utf-16") as players_file, temp_file:
         reader = csv.reader(players_file)
         writer = csv.writer(temp_file)
 
