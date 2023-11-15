@@ -17,7 +17,8 @@ if __name__ == "__main__":
     usernames = []
     finished = False
     while not finished:
-        username = input("Enter a username (type 'done' if finished): ")
+        username = input(
+            "Enter a username (case insensitive, type 'done' if finished): ")
         if username == "done":
             if len(usernames) > 0:
                 finished = True
@@ -39,7 +40,7 @@ if __name__ == "__main__":
         writer = csv.writer(temp_file)
 
         for row in reader:
-            if row[0] == name:
+            if row[0].lower() == name.lower():
                 writer.writerow(row + puuids)
             else:
                 writer.writerow(row)
