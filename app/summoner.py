@@ -1,18 +1,21 @@
 from dotenv import load_dotenv
 import os
-from riotwatcher import LolWatcher, ApiError
+from riotwatcher import LolWatcher, RiotWatcher, ApiError
 from rank import Rank
 
 load_dotenv()
 api_token = os.environ.get("API_KEY")
 lol_watcher = LolWatcher(api_token)
+riot_watcher = RiotWatcher(api_token)
+riot_region = 'europe'
 region = 'EUW1'
 
 
 class Summoner:
     def __init__(self, puuid):
         self.summoner_info = lol_watcher.summoner.by_puuid(region, puuid)
-        self.username = self.summoner_info['name']
+        account = riot_watcher.account.by_puuid(riot_region, puuid)
+        self.riot_id = account['gameName'] + '%23' + account['tagLine']
         self.rank = self.__get_rank()
 
     def __get_rank(self):

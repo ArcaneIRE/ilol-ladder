@@ -37,13 +37,13 @@ def add_players(players):
 
 def build_opgg(player):
     if len(player.summoners) == 1:
-        return "https://www.op.gg/summoners/euw/" + player.summoners[0].username
+        return "https://www.op.gg/summoners/euw/" + player.summoners[0].riot_id
     else:
-        usernames = []
+        riot_ids = []
         for summoner in player.summoners:
-            usernames.append(summoner.username)
+            riot_ids.append(summoner.riot_id)
         return "https://www.op.gg/multisearch/euw?summoners=" + \
-            ','.join(usernames)
+            ','.join(riot_ids)
 
 
 def add_timestamp():
