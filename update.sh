@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Move to correct directory
+repo_path="$(dirname "$0")"
+cd "$repo_path"
+
 # Activate the virtual environment
 source /home/arcane/repos/ilol-ladder/venv/bin/activate
 
