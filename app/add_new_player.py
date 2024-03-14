@@ -1,12 +1,12 @@
 from dotenv import load_dotenv
 import os
 import csv
-from riotwatcher import LolWatcher, ApiError
+from riotwatcher import RiotWatcher, ApiError
 
 load_dotenv()
 api_token = os.environ.get("API_KEY")
-lol_watcher = LolWatcher(api_token)
-region = 'EUW1'
+riot_watcher = RiotWatcher(api_token)
+region = 'europe'
 
 if __name__ == "__main__":
     name = input("Enter their player name: ")
@@ -18,22 +18,24 @@ if __name__ == "__main__":
         else:
             print("Invalid role")
 
-    usernames = []
+    riot_ids = []
     finished = False
     while not finished:
-        username = input("Enter a username (type 'done' if finished): ")
+        username = input(
+            "Enter a username with tagline separated by # (type 'done' if finished): ")
         if username == "done":
-            if len(usernames) > 0:
+            if len(riot_ids) > 0:
                 finished = True
             else:
                 print("No username has been entered yet")
         else:
+            riot_ids.append(username.split('#'))
             print("Added.")
-            usernames.append(username)
 
     puuids = []
-    for username in usernames:
-        response = lol_watcher.summoner.by_name(region, username)
+    for riot_id in riot_ids:
+        response = riot_watcher.account.by_riot_id(
+            region, riot_id[0], riot_id[1])
         puuids.append(response['puuid'])
 
     with open('app/players.csv', 'a', newline='', encoding="utf-16") as players_file:
