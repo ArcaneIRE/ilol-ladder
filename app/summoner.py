@@ -15,7 +15,7 @@ class Summoner:
     def __init__(self, puuid):
         self.summoner_info = lol_watcher.summoner.by_puuid(region, puuid)
         account = riot_watcher.account.by_puuid(riot_region, puuid)
-        self.riot_id = account['gameName'] + '%23' + account['tagLine']
+        self.riot_id = account['gameName'] + '-' + account['tagLine']
         self.rank = self.__get_rank()
 
     def __get_rank(self):
