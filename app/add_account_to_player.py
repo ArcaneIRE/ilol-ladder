@@ -1,36 +1,37 @@
 from dotenv import load_dotenv
 import os
 import csv
-from riotwatcher import LolWatcher, ApiError
+from riotwatcher import RiotWatcher, ApiError
 
 from tempfile import NamedTemporaryFile
 import shutil
 
 load_dotenv()
 api_token = os.environ.get("API_KEY")
-lol_watcher = LolWatcher(api_token)
-region = 'EUW1'
+riot_watcher = RiotWatcher(api_token)
+region = 'europe'
 
 if __name__ == "__main__":
     name = input("Enter their player name: ")
 
-    usernames = []
+    riot_ids = []
     finished = False
     while not finished:
         username = input(
-            "Enter a username (case insensitive, type 'done' if finished): ")
+            "Enter a username with tagline separated by # (type 'done' if finished): ")
         if username == "done":
-            if len(usernames) > 0:
+            if len(riot_ids) > 0:
                 finished = True
             else:
                 print("No username has been entered yet")
         else:
             print("Added.")
-            usernames.append(username)
+            riot_ids.append(username.split('#'))
 
     puuids = []
-    for username in usernames:
-        response = lol_watcher.summoner.by_name(region, username)
+    for riot_id in riot_ids:
+        response = riot_watcher.account.by_riot_id(
+            region, riot_id[0], riot_id[1])
         puuids.append(response['puuid'])
 
     temp_file = NamedTemporaryFile(
@@ -41,7 +42,7 @@ if __name__ == "__main__":
 
         for row in reader:
             if row[0].lower() == name.lower():
-                writer.writerow(row + puuids)
+                writer.writerow([*row, *puuids])
             else:
                 writer.writerow(row)
     shutil.move(temp_file.name, 'app/players.csv')
