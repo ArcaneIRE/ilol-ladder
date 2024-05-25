@@ -38,6 +38,6 @@ if __name__ == "__main__":
             region, riot_id[0], riot_id[1])
         puuids.append(response['puuid'])
 
-    with open('app/players.csv', 'a', newline='', encoding="utf-16") as players_file:
+    with open('app/players.csv', 'a', encoding="utf-16") as players_file:
         writer = csv.writer(players_file)
         writer.writerow([name, role, *puuids])
