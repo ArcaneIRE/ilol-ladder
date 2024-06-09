@@ -29,11 +29,11 @@ jobs:
 
       - name: Commit changes
         run: |
+          git pull --rebase origin master
           git config --local user.email "github-actions@github.com"
           git config --local user.name "Github Actions"
           git add .
           git commit -m "Workflow script execution"
-          git pull
 
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
