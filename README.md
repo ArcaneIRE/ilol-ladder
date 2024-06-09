@@ -6,4 +6,5 @@ A leaderboard that tracks the current ranks of Irish League of Legends players a
 - Sorts players by rank and builds a web page using their information
 - Tracks players across name-changes by using their unique account IDs
 - Written in Python using the [RiotWatcher](https://riot-watcher.readthedocs.io/en/latest/) library.
+- Uses a scheduled workflow to update the site daily at midnight, which is then automatically deployed.
 - Hosted on GitHub Pages
