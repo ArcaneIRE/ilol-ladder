@@ -27,5 +27,15 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python app/main.py
 
-      - name: List changes
-        run: git status
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions@github.com"
+          git config --local user.name "Github Actions"
+          git add .
+          git commit -m "Workflow script execution"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          branch: master
