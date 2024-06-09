@@ -9,6 +9,7 @@ with open('docs/index.html', 'r+', encoding="utf-16") as f:
 
 
 def buildPage(players):
+    print("Building page")
     add_players(players)
     add_timestamp()
     with open('docs/index.html', 'w', encoding="utf-16") as f:

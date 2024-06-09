@@ -4,6 +4,7 @@ from output import buildPage
 from functools import cmp_to_key
 
 if __name__ == "__main__":
+    print("Running...")
     players = []
     with open('app/players.csv', newline='', encoding="utf-16") as players_file:
         reader = csv.reader(players_file)
