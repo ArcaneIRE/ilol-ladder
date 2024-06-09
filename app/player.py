@@ -15,6 +15,7 @@ class Player:
         self.name = name
         self.role = role
         self.summoners = []
+        print(f"Getting summoner info for {name}")
         for puuid in puuids:
             self.summoners.append(Summoner(puuid))
         self.highest_rank_summoner = self.__get_highest_rank_summoner()
