@@ -32,6 +32,11 @@ jobs:
           git config --local user.email "github-actions@github.com"
           git config --local user.name "Github Actions"
           git add .
-          git commit -m "Workflow script execution"
-          git pull --rebase origin master
-          git push master
+          git commit -m "Update ladder w/ Workflow"
+          git pull --rebase
+
+      - name: push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
