@@ -4,7 +4,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: "*/3 * * * *" # every midnight
+    - cron: "*/5 * * * *" # Every 5 minutes
 
 jobs:
   Update-Ladder:
@@ -33,6 +33,7 @@ jobs:
           git config --local user.name "Github Actions"
           git add .
           git commit -m "Workflow script execution"
+          git pull
 
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
