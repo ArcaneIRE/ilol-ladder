@@ -4,7 +4,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *" # Every 5 minutes
+    - cron: "*/10 * * * *" # Every 10 minutes
 
 jobs:
   Update-Ladder:
@@ -34,4 +34,4 @@ jobs:
           git add .
           git commit -m "Workflow script execution"
           git pull --rebase origin master
-          git push origin master
+          git push master
