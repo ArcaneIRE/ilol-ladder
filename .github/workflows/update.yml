@@ -1,6 +1,7 @@
 name: Update ladder
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "*/3 * * * *" # every midnight
 
