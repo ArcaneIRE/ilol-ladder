@@ -24,6 +24,7 @@ jobs:
       - name: Run main.py to update leaderboard
         env:
           API_KEY: ${{ secrets.API_KEY }}
+          PYTHONUNBUFFERED: "1"
         run: python app/main.py
 
       - name: List changes
