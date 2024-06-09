@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 
 with open('docs/index.html', 'r+', encoding="utf-16") as f:
@@ -50,8 +51,9 @@ def build_opgg(player):
 def add_timestamp():
     timestamp = soup.find("div", class_='timestamp')
     timestamp.clear()
-    current_time = datetime.now().strftime("%H:%M")
-    current_date = datetime.now().strftime("%d/%m/%Y")
+    dublin_timezone = ZoneInfo("Europe/Dublin")
+    current_time = datetime.now(dublin_timezone).strftime("%H:%M")
+    current_date = datetime.now(dublin_timezone).strftime("%d/%m/%Y")
     time_string = "Last Refresh: " + \
         current_time + " (Irish time) " + current_date
     timestamp.append(time_string)
