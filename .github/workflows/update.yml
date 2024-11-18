@@ -4,7 +4,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *" # Midnight daily
+    - cron: "5 23 * * *" # Midnight daily
 
 jobs:
   Update-Ladder:
