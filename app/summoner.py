@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 import logging
-from riotwatcher import LolWatcher, RiotWatcher, ApiError
+from riotwatcher import LolWatcher, RiotWatcher
 from rank import Rank
 
 load_dotenv()

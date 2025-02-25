@@ -1,13 +1,5 @@
-from dotenv import load_dotenv
-import os
 import logging
-from riotwatcher import LolWatcher, ApiError
-from rank import Rank
 from summoner import Summoner
-
-load_dotenv()
-API_TOKEN = os.environ.get("API_KEY")
-LOL_WATCHER = LolWatcher(API_TOKEN)
 
 logger = logging.getLogger(__name__)
 

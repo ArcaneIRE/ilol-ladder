@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 import csv
 import logging
-from riotwatcher import RiotWatcher, ApiError
+from riotwatcher import RiotWatcher
 
 from tempfile import NamedTemporaryFile
 import shutil
