@@ -18,6 +18,9 @@ jobs:
         with:
           python-version: "3.10"
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
       - name: Run main.py to update leaderboard
         env:
           API_KEY: ${{ secrets.API_KEY }}
