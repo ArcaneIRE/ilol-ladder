@@ -1,13 +1,8 @@
 import csv
 import logging
-from player import Player
-from output import buildPage
-from functools import cmp_to_key
-
 from dotenv import load_dotenv
 import os
-from riotwatcher import LolWatcher, ApiError
-from rank import Rank
+from riotwatcher import LolWatcher
 
 load_dotenv()
 API_TOKEN = os.environ.get("API_KEY")

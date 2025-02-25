@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 import csv
 import logging
-from riotwatcher import RiotWatcher, ApiError
+from riotwatcher import RiotWatcher
 
 load_dotenv()
 API_TOKEN = os.environ.get("API_KEY")
