@@ -5,9 +5,9 @@ import logging
 from riotwatcher import LolWatcher, ApiError
 
 load_dotenv()
-api_token = os.environ.get("API_KEY")
-lol_watcher = LolWatcher(api_token)
-region = 'EUW1'
+API_TOKEN = os.environ.get("API_KEY")
+LOL_WATCHER = LolWatcher(API_TOKEN)
+REGION = 'EUW1'
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     puuids = []
     for username in usernames:
         try:
-            response = lol_watcher.summoner.by_name(region, username)
+            response = LOL_WATCHER.summoner.by_name(REGION, username)
             puuids.append(response['puuid'])
             logger.info(f"PUUID fetched for {username}: {response['puuid']}")
         except ApiError as e:
