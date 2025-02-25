@@ -5,9 +5,9 @@ import logging
 from riotwatcher import RiotWatcher, ApiError
 
 load_dotenv()
-api_token = os.environ.get("API_KEY")
-riot_watcher = RiotWatcher(api_token)
-region = 'europe'
+API_TOKEN = os.environ.get("API_KEY")
+RIOT_WATCHER = RiotWatcher(API_TOKEN)
+REGION = 'europe'
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -41,8 +41,8 @@ if __name__ == "__main__":
 
     puuids = []
     for riot_id in riot_ids:
-        response = riot_watcher.account.by_riot_id(
-            region, riot_id[0], riot_id[1])
+        response = RIOT_WATCHER.account.by_riot_id(
+            REGION, riot_id[0], riot_id[1])
         puuids.append(response['puuid'])
 
     try:

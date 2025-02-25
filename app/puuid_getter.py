@@ -10,9 +10,9 @@ from riotwatcher import LolWatcher, ApiError
 from rank import Rank
 
 load_dotenv()
-api_token = os.environ.get("API_KEY")
-lol_watcher = LolWatcher(api_token)
-region = 'EUW1'
+API_TOKEN = os.environ.get("API_KEY")
+LOL_WATCHER = LolWatcher(API_TOKEN)
+REGION = 'EUW1'
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ def get_puuids(usernames):
     logger.info(f"Fetching PUUIDs for usernames: {usernames}")
     puuids = []
     for username in usernames:
-        account_info = lol_watcher.summoner.by_name(region, username)
+        account_info = LOL_WATCHER.summoner.by_name(REGION, username)
         puuids.append(account_info['puuid'])
     logger.info(f"PUUIDs fetched: {puuids}")
     return puuids

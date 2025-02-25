@@ -6,9 +6,8 @@ from rank import Rank
 from summoner import Summoner
 
 load_dotenv()
-api_token = os.environ.get("API_KEY")
-lol_watcher = LolWatcher(api_token)
-region = 'EUW1'
+API_TOKEN = os.environ.get("API_KEY")
+LOL_WATCHER = LolWatcher(API_TOKEN)
 
 logger = logging.getLogger(__name__)
 
