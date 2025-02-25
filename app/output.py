@@ -1,7 +1,9 @@
 from bs4 import BeautifulSoup
 from datetime import datetime
 from zoneinfo import ZoneInfo
+import logging
 
+logger = logging.getLogger(__name__)
 
 with open('docs/index.html', 'r+', encoding="utf-16") as f:
     contents = f.read()
@@ -9,14 +11,16 @@ with open('docs/index.html', 'r+', encoding="utf-16") as f:
 
 
 def buildPage(players):
-    print("Building page")
+    logger.info("Building page")
     add_players(players)
     add_timestamp()
     with open('docs/index.html', 'w', encoding="utf-16") as f:
         f.write(str(soup.prettify()))
+    logger.info("Page written to docs/index.html")
 
 
 def add_players(players):
+    logger.info("Adding players to the page")
     ladder = soup.find("ol", class_='ladder')
     ladder.clear()
     for player in players:
@@ -35,9 +39,11 @@ def add_players(players):
         tag.append(rank)
 
         ladder.append(tag)
+    logger.info("Players added successfully")
 
 
 def build_opgg(player):
+    logger.info(f"Building op.gg link for player {player.name}")
     if len(player.summoners) == 1:
         return "https://www.op.gg/summoners/euw/" + player.summoners[0].riot_id[0] + '-' + player.summoners[0].riot_id[1]
     else:
@@ -50,6 +56,7 @@ def build_opgg(player):
 
 
 def add_timestamp():
+    logger.info("Adding timestamp to the page")
     timestamp = soup.find("div", class_='timestamp')
     timestamp.clear()
     dublin_timezone = ZoneInfo("Europe/Dublin")
@@ -58,3 +65,4 @@ def add_timestamp():
     time_string = "Last Refresh: " + \
         current_time + " (Irish time) " + current_date
     timestamp.append(time_string)
+    logger.info("Timestamp added successfully")
