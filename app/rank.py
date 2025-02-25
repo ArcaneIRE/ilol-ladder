@@ -1,4 +1,7 @@
+import logging
 from enum import Enum
+
+logger = logging.getLogger(__name__)
 
 
 class Tiers(Enum):
@@ -76,40 +79,27 @@ class Rank:
         self.tier = Tiers[tier]
         self.division = Divisions[division]
         self.lp = lp
+        logger.info(f"Rank created: {self}")
 
     def __lt__(self, other):
         if self.__class__ is other.__class__:
-            if self.tier < other.tier:
-                return True
-            elif self.tier == other.tier:
-                if self.division < other.division:
-                    return True
-                elif self.division == other.division:
-                    if self.lp < other.lp:
-                        return True
-            return False
+            result = (self.tier < other.tier) or (self.tier == other.tier and self.division < other.division) or (self.tier == other.tier and self.division == other.division and self.lp < other.lp)
+            logger.debug(f"Comparing {self} < {other}: {result}")
+            return result
         return NotImplemented
 
     def __gt__(self, other):
         if self.__class__ is other.__class__:
-            if self.tier > other.tier:
-                return True
-            elif self.tier == other.tier:
-                if self.division > other.division:
-                    return True
-                elif self.division == other.division:
-                    if self.lp > other.lp:
-                        return True
-            return False
+            result = (self.tier > other.tier) or (self.tier == other.tier and self.division > other.division) or (self.tier == other.tier and self.division == other.division and self.lp > other.lp)
+            logger.debug(f"Comparing {self} > {other}: {result}")
+            return result
         return NotImplemented
 
     def __eq__(self, other):
         if self.__class__ is other.__class__:
-            if self.tier == other.tier:
-                if self.division == other.division:
-                    if self.lp == other.lp:
-                        return True
-            return False
+            result = self.tier == other.tier and self.division == other.division and self.lp == other.lp
+            logger.debug(f"Comparing {self} == {other}: {result}")
+            return result
         return NotImplemented
 
     def __str__(self):

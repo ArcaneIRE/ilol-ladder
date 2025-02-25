@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import csv
+import logging
 from riotwatcher import RiotWatcher, ApiError
 
 from tempfile import NamedTemporaryFile
@@ -11,7 +12,11 @@ api_token = os.environ.get("API_KEY")
 riot_watcher = RiotWatcher(api_token)
 region = 'europe'
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 if __name__ == "__main__":
+    logger.info("Running add account to player script...")
     name = input("Enter their player name: ")
 
     riot_ids = []
@@ -23,9 +28,10 @@ if __name__ == "__main__":
             if len(riot_ids) > 0:
                 finished = True
             else:
+                logger.warning("No username has been entered yet")
                 print("No username has been entered yet")
         else:
-            print("Added.")
+            logger.info(f"Added username: {username}")
             riot_ids.append(username.split('#'))
 
     puuids = []
@@ -36,13 +42,17 @@ if __name__ == "__main__":
 
     temp_file = NamedTemporaryFile(
         mode='w', newline='', delete=False, encoding="utf-16")
-    with open('app/players.csv', 'r', newline='', encoding="utf-16") as players_file, temp_file:
-        reader = csv.reader(players_file)
-        writer = csv.writer(temp_file)
+    try:
+        with open('app/players.csv', 'r', newline='', encoding="utf-16") as players_file, temp_file:
+            reader = csv.reader(players_file)
+            writer = csv.writer(temp_file)
 
-        for row in reader:
-            if row[0].lower() == name.lower():
-                writer.writerow([*row, *puuids])
-            else:
-                writer.writerow(row)
-    shutil.move(temp_file.name, 'app/players.csv')
+            for row in reader:
+                if row[0].lower() == name.lower():
+                    writer.writerow([*row, *puuids])
+                else:
+                    writer.writerow(row)
+        shutil.move(temp_file.name, 'app/players.csv')
+        logger.info(f"Accounts added to player {name} in app/players.csv")
+    except Exception as e:
+        logger.error(f"Error updating player file: {e}")
