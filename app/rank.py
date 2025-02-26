@@ -46,7 +46,7 @@ class Divisions(Enum):
     IV = 1
     III = 2
     II = 3
-    I = 4
+    I = 4  # noqa: E741
 
     def __lt__(self, other):
         if self.__class__ is other.__class__:
