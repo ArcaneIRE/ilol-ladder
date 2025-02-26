@@ -81,7 +81,7 @@ requires-dist = [
     { name = "pycodestyle", specifier = "==2.10.0" },
     { name = "python-dotenv", specifier = "==1.0.0" },
     { name = "requests", specifier = "==2.28.2" },
-    { name = "riotwatcher", specifier = "==3.3.0" },
+    { name = "riotwatcher", specifier = ">=3.3.0" },
     { name = "soupsieve", specifier = "==2.4" },
     { name = "tomli", specifier = "==2.0.1" },
     { name = "urllib3", specifier = "==1.26.14" },
