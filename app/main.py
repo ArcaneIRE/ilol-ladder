@@ -1,14 +1,27 @@
+import argparse
 import csv
 import logging
 from player import Player
 from output import buildPage
 from functools import cmp_to_key
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+def setup_logging(debug=False):
+    log_level = logging.DEBUG if debug else logging.INFO
+    logging.basicConfig(level=log_level, format='%(asctime)s|%(levelname)s|%(module)s|%(message)s')
+    logger = logging.getLogger(__name__)
+    return logger
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='ilol Ladder application')
+    parser.add_argument('--debug', action='store_true', help='Enable debug logging')
+    args = parser.parse_args()
+
+    logger = setup_logging(args.debug)
+
     logger.info("Running...")
+    if args.debug:
+        logger.debug("Debug mode enabled")
+
     players = []
     try:
         with open('app/players.csv', newline='', encoding="utf-16") as players_file:
