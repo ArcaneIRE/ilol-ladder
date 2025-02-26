@@ -12,7 +12,10 @@ class Player:
         for puuid in puuids:
             self.summoners.append(Summoner(puuid))
         self.highest_rank_summoner = self.__get_highest_rank_summoner()
-        logger.info(f"Highest rank summoner for {name} is {self.highest_rank_summoner}")
+        if self.highest_rank_summoner is None:
+            logger.info(f"No rank found for {name}")
+        else:
+            logger.info(f"Highest rank for {name}: {self.highest_rank_summoner.rank}")
 
     def __get_highest_rank_summoner(self):
         highest = None
