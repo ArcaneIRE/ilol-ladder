@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Player Auction Values</title>
+        <style>
+            body {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background: linear-gradient(135deg, #402246 0%, #593529 100%);
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background: rgb(37, 37, 37);
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                overflow: hidden;
+            }
+
+            .header {
+                background: linear-gradient(45deg, #2c3e50, #34495e);
+                color: #eee;
+                padding: 30px;
+                text-align: center;
+            }
+
+            h1 {
+                margin: 0;
+                font-size: 2.5em;
+                font-weight: 300;
+            }
+
+            .subtitle {
+                margin: 10px 0 0 0;
+                opacity: 0.8;
+                font-size: 1.1em;
+            }
+
+            .table-container {
+                padding: 0;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 0;
+            }
+
+            th {
+                background: rgb(37, 37, 37);
+                color: #eee;
+                font-weight: 600;
+                padding: 15px;
+                text-align: left;
+                border-bottom: 2px solid #e9ecef;
+                position: sticky;
+                top: 0;
+            }
+
+            td {
+                padding: 12px 15px;
+                border-bottom: 1px solid #e9ecef;
+            }
+
+            tr:hover {
+                background-color: rgb(57, 57, 57);
+                transition: background-color 0.2s ease;
+            }
+
+            .rank {
+                font-weight: bold;
+                color: #eee;
+                width: 60px;
+            }
+
+            .player-name {
+                font-weight: 500;
+                color: #eee;
+            }
+
+            .value {
+                font-weight: bold;
+                color: #27ae60;
+                text-align: right;
+                width: 100px;
+            }
+
+            .top-3 .value {
+                color: #fdcd22;
+                font-size: 1.1em;
+            }
+
+            .stats {
+                padding: 20px;
+                background: rgb(37, 37, 37);
+                border-top: 1px solid #e9ecef;
+                text-align: center;
+                color: #eee;
+            }
+
+            @media (max-width: 600px) {
+                body {
+                    padding: 10px;
+                }
+
+                .header {
+                    padding: 20px;
+                }
+
+                h1 {
+                    font-size: 2em;
+                }
+
+                th,
+                td {
+                    padding: 8px 10px;
+                    font-size: 0.9em;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Quantex Auction Draft 2025</h1>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="top-3">
+                            <td class="rank">1</td>
+                            <td class="player-name">Anomaly</td>
+                            <td class="value">590</td>
+                        </tr>
+                        <tr class="top-3">
+                            <td class="rank">2</td>
+                            <td class="player-name">Zig</td>
+                            <td class="value">540</td>
+                        </tr>
+                        <tr class="top-3">
+                            <td class="rank">3</td>
+                            <td class="player-name">Zeamz</td>
+                            <td class="value">520</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">4</td>
+                            <td class="player-name">Eggs</td>
+                            <td class="value">500</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">5</td>
+                            <td class="player-name">Dakin</td>
+                            <td class="value">480</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">6</td>
+                            <td class="player-name">Cephalon</td>
+                            <td class="value">460</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">7</td>
+                            <td class="player-name">Zoinkers</td>
+                            <td class="value">460</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">8</td>
+                            <td class="player-name">MadaMars</td>
+                            <td class="value">450</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">9</td>
+                            <td class="player-name">StringTheBest</td>
+                            <td class="value">430</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">10</td>
+                            <td class="player-name">Costacourta</td>
+                            <td class="value">420</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">11</td>
+                            <td class="player-name">Earthshaker</td>
+                            <td class="value">420</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">12</td>
+                            <td class="player-name">Chinese Man</td>
+                            <td class="value">420</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">13</td>
+                            <td class="player-name">Cormac</td>
+                            <td class="value">420</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">14</td>
+                            <td class="player-name">Red Panda</td>
+                            <td class="value">410</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">15</td>
+                            <td class="player-name">Imakehermoo</td>
+                            <td class="value">410</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">16</td>
+                            <td class="player-name">BeyondDeath</td>
+                            <td class="value">400</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">17</td>
+                            <td class="player-name">Renghis</td>
+                            <td class="value">400</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">18</td>
+                            <td class="player-name">Martin</td>
+                            <td class="value">380</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">19</td>
+                            <td class="player-name">aza</td>
+                            <td class="value">370</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">20</td>
+                            <td class="player-name">USSRnema</td>
+                            <td class="value">370</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">21</td>
+                            <td class="player-name">WhyDoYouAskMe</td>
+                            <td class="value">370</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">22</td>
+                            <td class="player-name">KitingToSpace</td>
+                            <td class="value">360</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">23</td>
+                            <td class="player-name">Hai</td>
+                            <td class="value">350</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">24</td>
+                            <td class="player-name">Ocht</td>
+                            <td class="value">350</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">25</td>
+                            <td class="player-name">Darbaz</td>
+                            <td class="value">350</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">26</td>
+                            <td class="player-name">Avi</td>
+                            <td class="value">340</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">27</td>
+                            <td class="player-name">Asher / Berni</td>
+                            <td class="value">340</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">28</td>
+                            <td class="player-name">NinjaCya</td>
+                            <td class="value">330</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">29</td>
+                            <td class="player-name">Ravenn</td>
+                            <td class="value">320</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">30</td>
+                            <td class="player-name">CrimsonChaos</td>
+                            <td class="value">310</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">31</td>
+                            <td class="player-name">Azir</td>
+                            <td class="value">300</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">32</td>
+                            <td class="player-name">Sprumble</td>
+                            <td class="value">300</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">33</td>
+                            <td class="player-name">MackieTheSecond</td>
+                            <td class="value">280</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">34</td>
+                            <td class="player-name">Jofish</td>
+                            <td class="value">280</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">35</td>
+                            <td class="player-name">Noodle</td>
+                            <td class="value">270</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">36</td>
+                            <td class="player-name">Effyx</td>
+                            <td class="value">270</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">37</td>
+                            <td class="player-name">SystemOfAClown</td>
+                            <td class="value">250</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">38</td>
+                            <td class="player-name">DiscordedStorms</td>
+                            <td class="value">240</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">39</td>
+                            <td class="player-name">CleanAs</td>
+                            <td class="value">240</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">40</td>
+                            <td class="player-name">Melay</td>
+                            <td class="value">240</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">41</td>
+                            <td class="player-name">Daubany</td>
+                            <td class="value">230</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">42</td>
+                            <td class="player-name">ThomasNunu</td>
+                            <td class="value">230</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">43</td>
+                            <td class="player-name">Ciaran</td>
+                            <td class="value">230</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">44</td>
+                            <td class="player-name">Saberethan</td>
+                            <td class="value">230</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">45</td>
+                            <td class="player-name">Alt Tabby</td>
+                            <td class="value">220</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">46</td>
+                            <td class="player-name">Pascal</td>
+                            <td class="value">220</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">47</td>
+                            <td class="player-name">Sandstorm</td>
+                            <td class="value">220</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">48</td>
+                            <td class="player-name">Lilrat</td>
+                            <td class="value">210</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">49</td>
+                            <td class="player-name">MarvelousBadger</td>
+                            <td class="value">200</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">50</td>
+                            <td class="player-name">Alek</td>
+                            <td class="value">200</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">51</td>
+                            <td class="player-name">j5q</td>
+                            <td class="value">200</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">52</td>
+                            <td class="player-name">Radiant</td>
+                            <td class="value">190</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">53</td>
+                            <td class="player-name">Hybrid Elephant</td>
+                            <td class="value">180</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">54</td>
+                            <td class="player-name">PortgasDNox</td>
+                            <td class="value">160</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">55</td>
+                            <td class="player-name">Beemo</td>
+                            <td class="value">150</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">56</td>
+                            <td class="player-name">Robster Monaghan</td>
+                            <td class="value">150</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">57</td>
+                            <td class="player-name">Duffy</td>
+                            <td class="value">150</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">58</td>
+                            <td class="player-name">Ciaranz</td>
+                            <td class="value">150</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">59</td>
+                            <td class="player-name">J05TG</td>
+                            <td class="value">140</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">60</td>
+                            <td class="player-name">awesome</td>
+                            <td class="value">140</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">61</td>
+                            <td class="player-name">ashacus</td>
+                            <td class="value">130</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">62</td>
+                            <td class="player-name">Froggie</td>
+                            <td class="value">120</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">63</td>
+                            <td class="player-name">OliverPooleMusic</td>
+                            <td class="value">110</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">64</td>
+                            <td class="player-name">Bran</td>
+                            <td class="value">100</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">65</td>
+                            <td class="player-name">ToadSage</td>
+                            <td class="value">100</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">66</td>
+                            <td class="player-name">Chirpz</td>
+                            <td class="value">100</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">67</td>
+                            <td class="player-name">OBK</td>
+                            <td class="value">100</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">68</td>
+                            <td class="player-name">BootyTwist</td>
+                            <td class="value">100</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">69</td>
+                            <td class="player-name">5guns1something</td>
+                            <td class="value">100</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">70</td>
+                            <td class="player-name">Janiii</td>
+                            <td class="value">90</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">71</td>
+                            <td class="player-name">Tony Lazoote</td>
+                            <td class="value">90</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">72</td>
+                            <td class="player-name">Waxc</td>
+                            <td class="value">80</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">73</td>
+                            <td class="player-name">Michael Lowry</td>
+                            <td class="value">80</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">74</td>
+                            <td class="player-name">Cosy</td>
+                            <td class="value">50</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">75</td>
+                            <td class="player-name">Crimson Cyclist</td>
+                            <td class="value">50</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">76</td>
+                            <td class="player-name">Jak</td>
+                            <td class="value">50</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">77</td>
+                            <td class="player-name">Junkox</td>
+                            <td class="value">40</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">78</td>
+                            <td class="player-name">LegendJerry</td>
+                            <td class="value">30</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">79</td>
+                            <td class="player-name">Ducc</td>
+                            <td class="value">30</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">80</td>
+                            <td class="player-name">Satorlad</td>
+                            <td class="value">30</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">81</td>
+                            <td class="player-name">GnG Cass</td>
+                            <td class="value">30</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">82</td>
+                            <td class="player-name">Coroana</td>
+                            <td class="value">10</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">83</td>
+                            <td class="player-name">Kushswag</td>
+                            <td class="value">10</td>
+                        </tr>
+                        <tr>
+                            <td class="rank">84</td>
+                            <td class="player-name">spiciestbag</td>
+                            <td class="value">10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="stats">
+                Total Players: 84 | Highest Value: 590 | Lowest Value: 10
+            </div>
+        </div>
+    </body>
+</html>
