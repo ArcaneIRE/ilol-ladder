@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Quantex Auction 2025</title>
+        <title>Player Auction Values</title>
         <style>
             body {
                 font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -14,7 +14,7 @@
             }
 
             .container {
-                max-width: 600px;
+                max-width: 650px;
                 margin: 0 auto;
                 background: rgb(37, 37, 37);
                 border-radius: 10px;
@@ -41,6 +41,45 @@
                 font-size: 1.1em;
             }
 
+            .controls {
+                padding: 0.9em 1.1em;
+                border-bottom: 1px solid #444;
+            }
+
+            .filter-group {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1em;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .filter-label {
+                color: #eee;
+                font-weight: 500;
+                margin-right: 10px;
+            }
+
+            .role-filter {
+                background: rgb(60, 60, 60);
+                color: #eee;
+                border: 1px solid #666;
+                padding: 8px 12px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                font-size: 0.9em;
+            }
+
+            .role-filter:hover {
+                background: rgb(80, 80, 80);
+            }
+
+            .role-filter.active {
+                background: #27ae60;
+                border-color: #27ae60;
+            }
+
             .table-container {
                 padding: 0;
                 overflow-x: auto;
@@ -56,7 +95,7 @@
                 background: rgb(37, 37, 37);
                 color: #eee;
                 font-weight: 600;
-                padding: 15px;
+                padding: 0.8em;
                 text-align: left;
                 border-bottom: 2px solid #e9ecef;
                 position: sticky;
@@ -76,7 +115,7 @@
             .rank {
                 font-weight: bold;
                 color: #eee;
-                width: 60px;
+                width: 1em;
             }
 
             .player-name {
@@ -84,11 +123,26 @@
                 color: #eee;
             }
 
+            .player-name a {
+                color: #eee;
+                text-decoration: none;
+                transition: color 0.2s ease;
+            }
+
+            .player-name a:hover {
+                text-decoration: underline;
+            }
+
             .value {
                 font-weight: bold;
                 color: #27ae60;
                 text-align: right;
                 width: 100px;
+            }
+
+            .role {
+                color: #eee;
+                font-size: 0.9em;
             }
 
             .top-3 .value {
@@ -102,6 +156,10 @@
                 border-top: 1px solid #e9ecef;
                 text-align: center;
                 color: #eee;
+            }
+
+            .hidden {
+                display: none;
             }
 
             @media (max-width: 600px) {
@@ -122,6 +180,11 @@
                     padding: 8px 10px;
                     font-size: 0.9em;
                 }
+
+                .filter-group {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
             }
         </style>
     </head>
@@ -131,443 +194,656 @@
                 <h1>Quantex Auction Draft 2025</h1>
             </div>
 
+            <div class="controls">
+                <div class="filter-group">
+                    <span class="filter-label">Filters:</span>
+                    <button class="role-filter" data-role="Top">Top</button>
+                    <button class="role-filter" data-role="Jgl">Jungle</button>
+                    <button class="role-filter" data-role="Mid">Mid</button>
+                    <button class="role-filter" data-role="ADC">ADC</button>
+                    <button class="role-filter" data-role="Support">
+                        Support
+                    </button>
+                    <button class="role-filter" data-role="Fill">Fill</button>
+                </div>
+            </div>
+
             <div class="table-container">
                 <table>
                     <thead>
                         <tr>
                             <th>Rank</th>
                             <th>Player</th>
+                            <th>Role(s)</th>
                             <th>Value</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="top-3">
-                            <td class="rank">1</td>
-                            <td class="player-name">Anomaly</td>
-                            <td class="value">590</td>
-                        </tr>
-                        <tr class="top-3">
-                            <td class="rank">2</td>
-                            <td class="player-name">Zig</td>
-                            <td class="value">540</td>
-                        </tr>
-                        <tr class="top-3">
-                            <td class="rank">3</td>
-                            <td class="player-name">Zeamz</td>
-                            <td class="value">520</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">4</td>
-                            <td class="player-name">Eggs</td>
-                            <td class="value">500</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">5</td>
-                            <td class="player-name">Dakin</td>
-                            <td class="value">480</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">6</td>
-                            <td class="player-name">Cephalon</td>
-                            <td class="value">460</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">7</td>
-                            <td class="player-name">Zoinkers</td>
-                            <td class="value">460</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">8</td>
-                            <td class="player-name">MadaMars</td>
-                            <td class="value">450</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">9</td>
-                            <td class="player-name">StringTheBest</td>
-                            <td class="value">430</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">10</td>
-                            <td class="player-name">Costacourta</td>
-                            <td class="value">420</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">11</td>
-                            <td class="player-name">Earthshaker</td>
-                            <td class="value">420</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">12</td>
-                            <td class="player-name">Chinese Man</td>
-                            <td class="value">420</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">13</td>
-                            <td class="player-name">Cormac</td>
-                            <td class="value">420</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">14</td>
-                            <td class="player-name">Red Panda</td>
-                            <td class="value">410</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">15</td>
-                            <td class="player-name">Imakehermoo</td>
-                            <td class="value">410</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">16</td>
-                            <td class="player-name">BeyondDeath</td>
-                            <td class="value">400</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">17</td>
-                            <td class="player-name">Renghis</td>
-                            <td class="value">400</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">18</td>
-                            <td class="player-name">Martin</td>
-                            <td class="value">380</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">19</td>
-                            <td class="player-name">aza</td>
-                            <td class="value">370</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">20</td>
-                            <td class="player-name">USSRnema</td>
-                            <td class="value">370</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">21</td>
-                            <td class="player-name">WhyDoYouAskMe</td>
-                            <td class="value">370</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">22</td>
-                            <td class="player-name">KitingToSpace</td>
-                            <td class="value">360</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">23</td>
-                            <td class="player-name">Hai</td>
-                            <td class="value">350</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">24</td>
-                            <td class="player-name">Ocht</td>
-                            <td class="value">350</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">25</td>
-                            <td class="player-name">Darbaz</td>
-                            <td class="value">350</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">26</td>
-                            <td class="player-name">Avi</td>
-                            <td class="value">340</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">27</td>
-                            <td class="player-name">Asher / Berni</td>
-                            <td class="value">340</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">28</td>
-                            <td class="player-name">NinjaCya</td>
-                            <td class="value">330</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">29</td>
-                            <td class="player-name">Ravenn</td>
-                            <td class="value">320</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">30</td>
-                            <td class="player-name">CrimsonChaos</td>
-                            <td class="value">310</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">31</td>
-                            <td class="player-name">Azir</td>
-                            <td class="value">300</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">32</td>
-                            <td class="player-name">Sprumble</td>
-                            <td class="value">300</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">33</td>
-                            <td class="player-name">MackieTheSecond</td>
-                            <td class="value">280</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">34</td>
-                            <td class="player-name">Jofish</td>
-                            <td class="value">280</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">35</td>
-                            <td class="player-name">Noodle</td>
-                            <td class="value">270</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">36</td>
-                            <td class="player-name">Effyx</td>
-                            <td class="value">270</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">37</td>
-                            <td class="player-name">SystemOfAClown</td>
-                            <td class="value">250</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">38</td>
-                            <td class="player-name">DiscordedStorms</td>
-                            <td class="value">240</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">39</td>
-                            <td class="player-name">CleanAs</td>
-                            <td class="value">240</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">40</td>
-                            <td class="player-name">Melay</td>
-                            <td class="value">240</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">41</td>
-                            <td class="player-name">Daubany</td>
-                            <td class="value">230</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">42</td>
-                            <td class="player-name">ThomasNunu</td>
-                            <td class="value">230</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">43</td>
-                            <td class="player-name">Ciaran</td>
-                            <td class="value">230</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">44</td>
-                            <td class="player-name">Saberethan</td>
-                            <td class="value">230</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">45</td>
-                            <td class="player-name">Alt Tabby</td>
-                            <td class="value">220</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">46</td>
-                            <td class="player-name">Pascal</td>
-                            <td class="value">220</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">47</td>
-                            <td class="player-name">Sandstorm</td>
-                            <td class="value">220</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">48</td>
-                            <td class="player-name">Lilrat</td>
-                            <td class="value">210</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">49</td>
-                            <td class="player-name">MarvelousBadger</td>
-                            <td class="value">200</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">50</td>
-                            <td class="player-name">Alek</td>
-                            <td class="value">200</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">51</td>
-                            <td class="player-name">j5q</td>
-                            <td class="value">200</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">52</td>
-                            <td class="player-name">Radiant</td>
-                            <td class="value">190</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">53</td>
-                            <td class="player-name">Hybrid Elephant</td>
-                            <td class="value">180</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">54</td>
-                            <td class="player-name">PortgasDNox</td>
-                            <td class="value">160</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">55</td>
-                            <td class="player-name">Beemo</td>
-                            <td class="value">150</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">56</td>
-                            <td class="player-name">Robster Monaghan</td>
-                            <td class="value">150</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">57</td>
-                            <td class="player-name">Duffy</td>
-                            <td class="value">150</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">58</td>
-                            <td class="player-name">Ciaranz</td>
-                            <td class="value">150</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">59</td>
-                            <td class="player-name">J05TG</td>
-                            <td class="value">140</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">60</td>
-                            <td class="player-name">awesome</td>
-                            <td class="value">140</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">61</td>
-                            <td class="player-name">ashacus</td>
-                            <td class="value">130</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">62</td>
-                            <td class="player-name">Froggie</td>
-                            <td class="value">120</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">63</td>
-                            <td class="player-name">OliverPooleMusic</td>
-                            <td class="value">110</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">64</td>
-                            <td class="player-name">Bran</td>
-                            <td class="value">100</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">65</td>
-                            <td class="player-name">ToadSage</td>
-                            <td class="value">100</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">66</td>
-                            <td class="player-name">Chirpz</td>
-                            <td class="value">100</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">67</td>
-                            <td class="player-name">OBK</td>
-                            <td class="value">100</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">68</td>
-                            <td class="player-name">BootyTwist</td>
-                            <td class="value">100</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">69</td>
-                            <td class="player-name">5guns1something</td>
-                            <td class="value">100</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">70</td>
-                            <td class="player-name">Janiii</td>
-                            <td class="value">90</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">71</td>
-                            <td class="player-name">Tony Lazoote</td>
-                            <td class="value">90</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">72</td>
-                            <td class="player-name">Waxc</td>
-                            <td class="value">80</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">73</td>
-                            <td class="player-name">Michael Lowry</td>
-                            <td class="value">80</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">74</td>
-                            <td class="player-name">Cosy</td>
-                            <td class="value">50</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">75</td>
-                            <td class="player-name">Crimson Cyclist</td>
-                            <td class="value">50</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">76</td>
-                            <td class="player-name">Jak</td>
-                            <td class="value">50</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">77</td>
-                            <td class="player-name">Junkox</td>
-                            <td class="value">40</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">78</td>
-                            <td class="player-name">LegendJerry</td>
-                            <td class="value">30</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">79</td>
-                            <td class="player-name">Ducc</td>
-                            <td class="value">30</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">80</td>
-                            <td class="player-name">Satorlad</td>
-                            <td class="value">30</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">81</td>
-                            <td class="player-name">GnG Cass</td>
-                            <td class="value">30</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">82</td>
-                            <td class="player-name">Coroana</td>
-                            <td class="value">10</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">83</td>
-                            <td class="player-name">Kushswag</td>
-                            <td class="value">10</td>
-                        </tr>
-                        <tr>
-                            <td class="rank">84</td>
-                            <td class="player-name">spiciestbag</td>
-                            <td class="value">10</td>
-                        </tr>
+                    <tbody id="player-table">
+                        <!-- Players will be inserted here by JavaScript -->
                     </tbody>
                 </table>
             </div>
 
-            <div class="stats">
-                Total Players: 84 | Highest Value: 590 | Lowest Value: 10
+            <div class="stats" id="stats">
+                <!-- Stats will be updated by JavaScript -->
             </div>
         </div>
+
+        <script>
+            const players = [
+                {
+                    Player: "Anomaly",
+                    Cost: "590",
+                    Role: "Top,Jgl,Mid,ADC",
+                    Link: "https://op.gg/de/lol/summoners/euw/Red-Jeek",
+                },
+                {
+                    Player: "Zig",
+                    Cost: "540",
+                    Role: "Mid,ADC,Support",
+                    Link: "https://op.gg/de/lol/summoners/euw/zig-down",
+                },
+                {
+                    Player: "zeamz",
+                    Cost: "520",
+                    Role: "Jungle",
+                    Link: "https://op.gg/es/lol/summoners/euw/zeamz-777",
+                },
+                {
+                    Player: "eggs",
+                    Cost: "500",
+                    Role: "Top,Mid",
+                    Link: "https://www.op.gg/summoners/euw/eggs-EUW",
+                },
+                {
+                    Player: "Dakin",
+                    Cost: "480",
+                    Role: "Jgl,Support,Fill",
+                    Link: "http://euw.op.gg/Dakin#Eire",
+                },
+                {
+                    Player: "Cephalon",
+                    Cost: "460",
+                    Role: "Jungle",
+                    Link: "https://op.gg/lol/summoners/euw/L9%20Dr%20House-MOG",
+                },
+                {
+                    Player: "Zoinkers",
+                    Cost: "460",
+                    Role: "Top",
+                    Link: "https://op.gg/lol/summoners/euw/ZOINKERS-CHUNG",
+                },
+                {
+                    Player: "MadaMars",
+                    Cost: "450",
+                    Role: "Top",
+                    Link: "https://op.gg/es/lol/summoners/euw/MadaMars-EUW",
+                },
+                {
+                    Player: "Stringthebest",
+                    Cost: "430",
+                    Role: "Mid",
+                    Link: "https://op.gg/de/lol/summoners/euw/yasko-OSAGA",
+                },
+                {
+                    Player: "Costacourta",
+                    Cost: "420",
+                    Role: "Support",
+                    Link: "https://op.gg/lol/summoners/euw/Dudell-EUW",
+                },
+                {
+                    Player: "Earthshaker",
+                    Cost: "420",
+                    Role: "Fill",
+                    Link: "https://op.gg/lol/summoners/euw/Earthshaker-Dirt",
+                },
+                {
+                    Player: "Chinese Man",
+                    Cost: "420",
+                    Role: "Top,Mid",
+                    Link: "https://op.gg/lol/summoners/euw/Chinese%20Man-727",
+                },
+                {
+                    Player: "Cormac",
+                    Cost: "420",
+                    Role: "Top,Mid",
+                    Link: "https://op.gg/de/lol/summoners/euw/Cormac-EIRE",
+                },
+                {
+                    Player: "Red Panda",
+                    Cost: "410",
+                    Role: "ADC,Support",
+                    Link: "https://op.gg/de/lol/summoners/euw/Red%20Balloon-0000",
+                },
+                {
+                    Player: "i make her moo",
+                    Cost: "410",
+                    Role: "Mid,ADC",
+                    Link: "https://op.gg/lol/summoners/euw/i%20make%20her%20moo-miau",
+                },
+                {
+                    Player: "Beyonddeath",
+                    Cost: "400",
+                    Role: "Jungle",
+                    Link: "https://op.gg/es/lol/summoners/euw/Beyonddeath-Heca",
+                },
+                {
+                    Player: "Renghis",
+                    Cost: "400",
+                    Role: "Support",
+                    Link: "https://op.gg/lol/summoners/euw/RENGHIS-KHAN",
+                },
+                {
+                    Player: "Martin",
+                    Cost: "380",
+                    Role: "ADC",
+                    Link: "https://op.gg/lol/summoners/euw/Martin-333",
+                },
+                {
+                    Player: "aza",
+                    Cost: "370",
+                    Role: "ADC,Support,Fill",
+                    Link: "https://op.gg/lol/summoners/euw/aza-1v5",
+                },
+                {
+                    Player: "USSRNema",
+                    Cost: "370",
+                    Role: "Top,Mid",
+                    Link: "https://op.gg/lol/summoners/euw/USSRNEMA-EIRE",
+                },
+                {
+                    Player: "WhyDoYouAskMe",
+                    Cost: "370",
+                    Role: "ADC",
+                    Link: "https://op.gg/lol/summoners/euw/WhyDoYouAskMe-YSKM",
+                },
+                {
+                    Player: "Kitingtospace",
+                    Cost: "360",
+                    Role: "ADC",
+                    Link: "https://op.gg/lol/summoners/euw/KITINGTOSPACE-EUW",
+                },
+                {
+                    Player: "Ocht",
+                    Cost: "350",
+                    Role: "Support",
+                    Link: "https://op.gg/lol/summoners/euw/Ocht-IRE",
+                },
+                {
+                    Player: "Darbaz",
+                    Cost: "350",
+                    Role: "Top",
+                    Link: "https://op.gg/de/lol/summoners/euw/RAPP%20YOU-BLEED",
+                },
+                {
+                    Player: "Hai",
+                    Cost: "350",
+                    Role: "ADC",
+                    Link: "https://op.gg/lol/summoners/euw/Hai-1603",
+                },
+                {
+                    Player: "Avi",
+                    Cost: "340",
+                    Role: "Top",
+                    Link: "https://op.gg/lol/summoners/euw/L9%20Agent%20Lundy-rr01",
+                },
+                {
+                    Player: "Asher / Berni",
+                    Cost: "340",
+                    Role: "Mid,ADC",
+                    Link: "https://op.gg/de/lol/multisearch/euw?summoners=Berninu%23woof%2CAsher%23Faker",
+                },
+                {
+                    Player: "Ninjacya321",
+                    Cost: "330",
+                    Role: "Top",
+                    Link: "https://op.gg/es/lol/summoners/euw/Ninjacya321-EUW",
+                },
+                {
+                    Player: "Ravenn",
+                    Cost: "320",
+                    Role: "ADC",
+                    Link: "https://op.gg/lol/summoners/euw/R%C3%A1v%C3%A9nn-EUW",
+                },
+                {
+                    Player: "CrimsonChaos",
+                    Cost: "310",
+                    Role: "ADC,Fill",
+                    Link: "https://op.gg/fr/lol/summoners/euw/CrimsonChaos-CHAOS",
+                },
+                {
+                    Player: "Sprumble",
+                    Cost: "300",
+                    Role: "Top,Support",
+                    Link: "https://op.gg/lol/summoners/euw/Sprumble-000",
+                },
+                {
+                    Player: "Azir",
+                    Cost: "300",
+                    Role: "Top,Mid,ADC",
+                    Link: "https://op.gg/de/lol/summoners/eune/Azir-Dsert",
+                },
+                {
+                    Player: "Jofish",
+                    Cost: "280",
+                    Role: "Jungle,ADC,Support",
+                    Link: "https://op.gg/lol/summoners/euw/Jofish-EUW",
+                },
+                {
+                    Player: "MackieTheSecond",
+                    Cost: "280",
+                    Role: "Jungle",
+                    Link: "https://op.gg/es/lol/summoners/euw/MackieTheSecond-goat",
+                },
+                {
+                    Player: "Effyx",
+                    Cost: "270",
+                    Role: "Mid,ADC",
+                    Link: "https://op.gg/de/lol/summoners/euw/Effyx-0000",
+                },
+                {
+                    Player: "Noodle",
+                    Cost: "270",
+                    Role: "Mid",
+                    Link: "https://op.gg/es/lol/summoners/euw/Noodle-7777",
+                },
+                {
+                    Player: "SystemofaClown",
+                    Cost: "250",
+                    Role: "Top,Jgl",
+                    Link: "https://op.gg/de/lol/summoners/euw/ClownIRL-9396",
+                },
+                {
+                    Player: "DiscordedStorms",
+                    Cost: "240",
+                    Role: "Top",
+                    Link: "https://op.gg/lol/summoners/euw/DiscordedStorms-3462",
+                },
+                {
+                    Player: "CleanAs",
+                    Cost: "240",
+                    Role: "Mid,Support",
+                    Link: "https://op.gg/de/lol/summoners/euw/CleanAs-EUW",
+                },
+                {
+                    Player: "Melay",
+                    Cost: "240",
+                    Role: "Top",
+                    Link: "https://op.gg/lol/summoners/euw/Melay-JEEK",
+                },
+                {
+                    Player: "Ciaran",
+                    Cost: "230",
+                    Role: "ADC,Fill",
+                    Link: "https://op.gg/lol/summoners/euw/Ciar%C3%A0n-EUW",
+                },
+                {
+                    Player: "Daubany",
+                    Cost: "230",
+                    Role: "Top",
+                    Link: "https://op.gg/lol/multisearch/euw?summoners=Daubany%23EUW%2CPlankMeDad%23SM03",
+                },
+                {
+                    Player: "Thomas078",
+                    Cost: "230",
+                    Role: "Jungle",
+                    Link: "https://op.gg/de/lol/summoners/euw/Thomas-078",
+                },
+                {
+                    Player: "Saberethan",
+                    Cost: "230",
+                    Role: "Support",
+                    Link: "https://op.gg/es/lol/summoners/euw/Saberethan-EUW",
+                },
+                {
+                    Player: "Alt Tabby",
+                    Cost: "220",
+                    Role: "Mid,ADC,Support",
+                    Link: "https://op.gg/de/lol/summoners/euw/Alt%20Tabby-Tabby",
+                },
+                {
+                    Player: "Pascal",
+                    Cost: "220",
+                    Role: "Mid,ADC",
+                    Link: "https://op.gg/lol/summoners/euw/Pascal-6969",
+                },
+                {
+                    Player: "Sandstorm",
+                    Cost: "220",
+                    Role: "Support",
+                    Link: "https://op.gg/lol/summoners/euw/zZSandStormZz-Lotte",
+                },
+                {
+                    Player: "LilRat",
+                    Cost: "210",
+                    Role: "Fill",
+                    Link: "https://op.gg/lol/summoners/euw/LilRat-ff15",
+                },
+                {
+                    Player: "Alek",
+                    Cost: "200",
+                    Role: "Mid",
+                    Link: "https://op.gg/de/lol/summoners/euw/Alek-Toxic",
+                },
+                {
+                    Player: "MarvelousBadger",
+                    Cost: "200",
+                    Role: "Mid,Support,Fill",
+                    Link: "https://op.gg/de/lol/summoners/euw/MarvelousBadger-3704",
+                },
+                {
+                    Player: "j5q",
+                    Cost: "200",
+                    Role: "Top,Jgl",
+                    Link: "https://op.gg/de/lol/summoners/euw/j5q-troll",
+                },
+                {
+                    Player: "Radiant",
+                    Cost: "190",
+                    Role: "Top,Support",
+                    Link: "https://op.gg/lol/summoners/euw/Radiant-punky?queue_type=TOTAL",
+                },
+                {
+                    Player: "Hybrid Elephant",
+                    Cost: "180",
+                    Role: "Top,Mid",
+                    Link: "https://op.gg/lol/summoners/euw/Hybrid%20Elephant-EUW",
+                },
+                {
+                    Player: "PortgasDNox",
+                    Cost: "160",
+                    Role: "Jungle",
+                    Link: "https://op.gg/lol/summoners/euw/PortgasDNox-EUW",
+                },
+                {
+                    Player: "Beemo2",
+                    Cost: "150",
+                    Role: "Jungle",
+                    Link: "https://op.gg/lol/summoners/euw/Beemo2-EUW",
+                },
+                {
+                    Player: "Robster Monahan",
+                    Cost: "150",
+                    Role: "Support",
+                    Link: "https://op.gg/lol/summoners/euw/RobsterMonahan-EUW",
+                },
+                {
+                    Player: "Duffy262",
+                    Cost: "150",
+                    Role: "Top,Mid",
+                    Link: "https://op.gg/lol/summoners/euw/Duffy262-1143",
+                },
+                {
+                    Player: "Ciaranz",
+                    Cost: "150",
+                    Role: "Mid,ADC",
+                    Link: "https://op.gg/lol/summoners/euw/Ciar%C3%A1nz-EUW",
+                },
+                {
+                    Player: "J05TCG",
+                    Cost: "140",
+                    Role: "Top,ADC",
+                    Link: "https://op.gg/de/lol/summoners/euw/%E5%85%AD%E4%B8%AA%E4%BA%94-six5s",
+                },
+                {
+                    Player: "awesome7438",
+                    Cost: "140",
+                    Role: "Jungle",
+                    Link: "https://op.gg/lol/summoners/euw/awesome7438-weezr",
+                },
+                {
+                    Player: "ashacus",
+                    Cost: "130",
+                    Role: "Support",
+                    Link: "https://op.gg/lol/summoners/euw/ashacus-1358",
+                },
+                {
+                    Player: "Froggie",
+                    Cost: "120",
+                    Role: "Mid,ADC,Support",
+                    Link: "https://op.gg/lol/summoners/euw/froggie-ivy",
+                },
+                {
+                    Player: "OliverPooleMusic",
+                    Cost: "110",
+                    Role: "ADC",
+                    Link: "https://op.gg/es/lol/summoners/euw/OliverPooleMusic-EUW",
+                },
+                {
+                    Player: "Ch1rpz",
+                    Cost: "100",
+                    Role: "Top,Mid,Support",
+                    Link: "https://op.gg/de/lol/summoners/euw/clairo-AUML",
+                },
+                {
+                    Player: "Toad Sage",
+                    Cost: "100",
+                    Role: "Jgl,Support",
+                    Link: "https://op.gg/lol/summoners/euw/ToadSage-1313",
+                },
+                {
+                    Player: "OBK99",
+                    Cost: "100",
+                    Role: "ADC,Support",
+                    Link: "https://op.gg/lol/summoners/euw/OBK99-EUW",
+                },
+                {
+                    Player: "Booty Twist",
+                    Cost: "100",
+                    Role: "ADC,Support",
+                    Link: "https://op.gg/lol/summoners/euw/BOOTY%20TWIST-EUW",
+                },
+                {
+                    Player: "5 guns 1 cup",
+                    Cost: "100",
+                    Role: "ADC",
+                    Link: "https://op.gg/lol/summoners/euw/5%20guns%201%20cup-MOG",
+                },
+                {
+                    Player: "Bran",
+                    Cost: "100",
+                    Role: "Top,Mid,ADC,Support",
+                    Link: "https://op.gg/de/lol/summoners/euw/Bran-EUW",
+                },
+                {
+                    Player: "Janiii",
+                    Cost: "90",
+                    Role: "Mid,ADC",
+                    Link: "https://op.gg/lol/summoners/euw/Janiii-Egorl",
+                },
+                {
+                    Player: "Tony Lazootoe",
+                    Cost: "90",
+                    Role: "Top,Mid",
+                    Link: "https://op.gg/de/lol/summoners/euw/tony%20lazootoe-euw",
+                },
+                {
+                    Player: "Michael Lowry",
+                    Cost: "80",
+                    Role: "Top,Jgl,Support",
+                    Link: "https://op.gg/lol/summoners/euw/Michael%20Lowry-D%C3%A1il",
+                },
+                {
+                    Player: "Waxc",
+                    Cost: "80",
+                    Role: "Fill",
+                    Link: "https://op.gg/es/lol/summoners/euw/Waxc-Waxc",
+                },
+                {
+                    Player: "Cosy",
+                    Cost: "50",
+                    Role: "Fill",
+                    Link: "https://op.gg/es/lol/summoners/euw/Cosy-1234",
+                },
+                {
+                    Player: "CrimsonCyclist",
+                    Cost: "50",
+                    Role: "Mid,Support",
+                    Link: "https://op.gg/lol/summoners/euw/CrimsonCyclist-EUW",
+                },
+                {
+                    Player: "jak",
+                    Cost: "50",
+                    Role: "Support",
+                    Link: "https://op.gg/de/lol/summoners/euw/jak-6501",
+                },
+                {
+                    Player: "Junkox",
+                    Cost: "40",
+                    Role: "Jgl",
+                    Link: "https://op.gg/de/lol/summoners/euw/Junk0x-EUW",
+                },
+                {
+                    Player: "LegendJerry",
+                    Cost: "30",
+                    Role: "Fill",
+                    Link: "http://op.gg/legendjerry",
+                },
+                {
+                    Player: "Ducc",
+                    Cost: "30",
+                    Role: "Jgl,Mid",
+                    Link: "https://op.gg/lol/summoners/euw/Ducc-tem",
+                },
+                {
+                    Player: "Satorlad",
+                    Cost: "30",
+                    Role: "Fill",
+                    Link: "https://op.gg/es/lol/summoners/euw/Satorlad-EUW",
+                },
+                {
+                    Player: "GnG Cass",
+                    Cost: "30",
+                    Role: "Jgl,ADC",
+                    Link: "https://op.gg/lol/summoners/euw/GnG%20Cass-Ralts",
+                },
+                {
+                    Player: "spiciestbag",
+                    Cost: "10",
+                    Role: "Support",
+                    Link: "https://op.gg/lol/summoners/euw/spiciestbag-3669",
+                },
+                {
+                    Player: "Kushswag",
+                    Cost: "10",
+                    Role: "Fill",
+                    Link: "https://op.gg/de/lol/summoners/euw/snappysnake98-30mg",
+                },
+                {
+                    Player: "Coroana",
+                    Cost: "10",
+                    Role: "Fill",
+                    Link: "https://op.gg/de/lol/summoners/euw/Coroana-fat",
+                },
+            ];
+
+            let filteredPlayers = [...players];
+            let activeFilters = new Set();
+
+            function normalizeRole(role) {
+                const roleMap = {
+                    Jgl: "Jungle",
+                    jungle: "Jungle",
+                };
+                return roleMap[role] || role;
+            }
+
+            function renderTable() {
+                const tbody = document.getElementById("player-table");
+                tbody.innerHTML = "";
+
+                filteredPlayers.forEach((player, index) => {
+                    const row = document.createElement("tr");
+                    if (index < 3) {
+                        row.classList.add("top-3");
+                    }
+
+                    const roles = player.Role.split(",")
+                        .map((r) => normalizeRole(r.trim()))
+                        .join(", ");
+
+                    row.innerHTML = `
+                        <td class="rank">${index + 1}</td>
+                        <td class="player-name">
+                            <a href="${
+                                player.Link
+                            }" target="_blank" rel="noopener noreferrer">
+                                ${player.Player}
+                            </a>
+                        </td>
+                        <td class="role">${roles}</td>
+                        <td class="value">${player.Cost}</td>
+                    `;
+
+                    tbody.appendChild(row);
+                });
+
+                updateStats();
+            }
+
+            function updateStats() {
+                const totalPlayers = filteredPlayers.length;
+                const highestValue =
+                    filteredPlayers.length > 0
+                        ? Math.max(
+                              ...filteredPlayers.map((p) => parseInt(p.Cost))
+                          )
+                        : 0;
+                const lowestValue =
+                    filteredPlayers.length > 0
+                        ? Math.min(
+                              ...filteredPlayers.map((p) => parseInt(p.Cost))
+                          )
+                        : 0;
+
+                document.getElementById(
+                    "stats"
+                ).innerHTML = `Total Players: ${totalPlayers} | Highest Value: ${highestValue} | Lowest Value: ${lowestValue}`;
+            }
+
+            function filterPlayers() {
+                if (activeFilters.size === 0) {
+                    filteredPlayers = [...players];
+                } else {
+                    filteredPlayers = players.filter((player) => {
+                        const playerRoles = player.Role.split(",").map((r) =>
+                            normalizeRole(r.trim())
+                        );
+                        return Array.from(activeFilters).some((filter) =>
+                            playerRoles.includes(filter)
+                        );
+                    });
+                }
+                renderTable();
+            }
+
+            // Event listeners
+            document.querySelectorAll(".role-filter").forEach((button) => {
+                button.addEventListener("click", () => {
+                    const role = button.dataset.role;
+                    const normalizedRole = normalizeRole(role);
+
+                    // Check if this button is currently active before clearing
+                    const wasActive = button.classList.contains("active");
+
+                    // Clear all filters first (single selection)
+                    activeFilters.clear();
+                    document.querySelectorAll(".role-filter").forEach((btn) => {
+                        btn.classList.remove("active");
+                    });
+
+                    // If button wasn't active, activate it; if it was active, leave it cleared
+                    if (!wasActive) {
+                        activeFilters.add(normalizedRole);
+                        button.classList.add("active");
+                    }
+
+                    filterPlayers();
+                });
+            });
+
+            // Initial render
+            renderTable();
+        </script>
     </body>
 </html>
