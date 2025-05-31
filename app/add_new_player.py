@@ -11,6 +11,7 @@ REGION = 'europe'
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+logging.getLogger('riotwatcher').setLevel(logging.ERROR)
 
 if __name__ == "__main__":
     logger.info("Running add new player script...")
@@ -41,7 +42,6 @@ if __name__ == "__main__":
 
     puuids = []
     for riot_id in riot_ids:
-        logging.getLogger('riotwatcher').setLevel(logging.ERROR)
         response = RIOT_WATCHER.account.by_riot_id(
             REGION, riot_id[0], riot_id[1])
         puuids.append(response['puuid'])
