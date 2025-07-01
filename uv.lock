@@ -81,7 +81,7 @@ requires-dist = [
     { name = "pycodestyle", specifier = "==2.10.0" },
     { name = "python-dotenv", specifier = "==1.0.0" },
     { name = "requests", specifier = "==2.28.2" },
-    { name = "riotwatcher", specifier = ">=3.3.0" },
+    { name = "riotwatcher", specifier = ">=3.3.1" },
     { name = "soupsieve", specifier = "==2.4" },
     { name = "tomli", specifier = "==2.0.1" },
     { name = "urllib3", specifier = "==1.26.14" },
@@ -122,14 +122,14 @@ wheels = [
 
 [[package]]
 name = "riotwatcher"
-version = "3.3.0"
+version = "3.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/46/87/7823759c95ed93f329199f0739b63efd7fc5bfd336c504287f24faecc7ea/riotwatcher-3.3.0.tar.gz", hash = "sha256:bf6c632a301f68122988425ef5bf2aad4b2989d5a66af9b30ac17290f8f22cf3", size = 36660 }
+sdist = { url = "https://files.pythonhosted.org/packages/be/ed/0e601999301a8fe0f0bad08c5a21f5246074703500adfd40270f53ee4b0d/riotwatcher-3.3.1.tar.gz", hash = "sha256:40047cddd7a2caff1b514b1f8ba1910575c7639f4c6a02b90f9b777bad63b7c9", size = 37741 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7d/86/e1f4af85633b68773b85bd3eba4256a9fa268c3932b0d54167051256a169/riotwatcher-3.3.0-py3-none-any.whl", hash = "sha256:d35ce6d2a8b49b80f16ba2c6287dfe2ef8f4ba1313e19b30a88af356991a6123", size = 59370 },
+    { url = "https://files.pythonhosted.org/packages/e5/e2/07aad1b449dc11283c7251675b2216cc8704b88b3aaa123e213a4577dd4d/riotwatcher-3.3.1-py3-none-any.whl", hash = "sha256:0fa34222bdddb046119146942390c1ff9d5ac5b57c4750b54d01fb51e1a27a09", size = 60780 },
 ]
 
 [[package]]

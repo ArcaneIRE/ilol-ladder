@@ -44,15 +44,13 @@ def execute_with_retry(api_function, max_retries=5, initial_backoff=30):
 class Summoner:
     def __init__(self, puuid):
         logger.info(f"Fetching summoner info for PUUID: {puuid}")
-        self.summoner_info = execute_with_retry(lambda: LOL_WATCHER.summoner.by_puuid(REGION, puuid))
         account = execute_with_retry(lambda: RIOT_WATCHER.account.by_puuid(RIOT_REGION, puuid))
         self.riot_id = [account['gameName'],  account['tagLine']]
-        self.rank = self.__get_rank()
+        self.rank = self.__get_rank(puuid)
         logger.info(f"Summoner info fetched for PUUID: {puuid}")
 
-    def __get_rank(self):
-        summoner_id = self.summoner_info['id']
-        all_queue_stats = execute_with_retry(lambda: LOL_WATCHER.league.by_summoner(REGION, summoner_id))
+    def __get_rank(self, puuid):
+        all_queue_stats = execute_with_retry(lambda: LOL_WATCHER.league.by_puuid(REGION, puuid))
         if not all_queue_stats:
             return
 
