@@ -2,7 +2,7 @@ import argparse
 import csv
 import logging
 from player import Player
-from output import buildPage
+from output import build_page
 from functools import cmp_to_key
 
 def setup_logging(debug=False):
@@ -41,5 +41,5 @@ if __name__ == "__main__":
         return x.compare_rank_to(y)
 
     sorted_players = sorted(players, key=cmp_to_key(cmp_func), reverse=True)
-    buildPage(sorted_players)
+    build_page(sorted_players)
     logger.info("Page built successfully")

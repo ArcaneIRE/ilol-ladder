@@ -10,7 +10,7 @@ with open('docs/index.html', 'r+', encoding="utf-16") as f:
     soup = BeautifulSoup(contents, 'html.parser')
 
 
-def buildPage(players):
+def build_page(players):
     logger.info("Building page")
     add_players(players)
     add_timestamp()
