@@ -1,0 +1,13 @@
+name = "ilol-ladder"
+compatibility_date = "2025-11-01"
+
+# Publish only files from the docs/ folder
+assets = { directory = "./docs" }
+
+# Disables use of *.workers.dev subdomain deployment
+workers_dev = false
+
+[[routes]]
+# Set route to ranks.davidcorcoran.ie and use the parent domain as the zone
+pattern = "ranks.davidcorcoran.ie/*"
+zone_name = "davidcorcoran.ie"
